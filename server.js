@@ -29,14 +29,3 @@ function youtubeToJson(url, res) {
         })
     });
 }
-
-function getJson(url, res) {
-    youtubeToJson(url)
-        .then()
-}
-
-function returnJson(data) {
-    console.log(data);
-}
-
-getJson(url);
