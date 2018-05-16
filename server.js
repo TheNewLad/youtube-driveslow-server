@@ -8,7 +8,7 @@ let url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC2t38_hyT_uJnZEY
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'application/json'});
     youtubeToJson(url, res);
-}).listen(80);
+})
 
 function youtubeToJson(url, res) {
     fetchUrl(url, function (error, meta, body) {
