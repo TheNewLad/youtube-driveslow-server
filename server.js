@@ -1,0 +1,42 @@
+const feed2json = require('feed2json');
+const fetch = require('fetch');
+const fetchUrl = fetch.fetchUrl;
+const http = require('http');
+
+let url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC2t38_hyT_uJnZEY2gwbtBw";
+
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    youtubeToJson(url, res);
+}).listen(80);
+
+function youtubeToJson(url, res) {
+    fetchUrl(url, function (error, meta, body) {
+        // console.log(body.toString());
+        let xml = body.toString();
+        feed2json.fromString(xml, url, (err, data) => {
+            // check for err
+            // otherwise `json` is populated with JSONFeed format
+            if (err) {
+                console.warn(err)
+                data = { err: 'Error processing feed' }
+                res.write(JSON.stringify(data));
+                res.end();
+            } else {
+                res.write(JSON.stringify(data));
+                res.end();
+            }
+        })
+    });
+}
+
+function getJson(url, res) {
+    youtubeToJson(url)
+        .then()
+}
+
+function returnJson(data) {
+    console.log(data);
+}
+
+getJson(url);
