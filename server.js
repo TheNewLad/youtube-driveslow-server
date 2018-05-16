@@ -6,7 +6,10 @@ const http = require('http');
 let url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC2t38_hyT_uJnZEY2gwbtBw";
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.writeHead(200, {
+        'Content-Type': 'application/json', 
+        'Access-Control-Allow-Origin': '*'
+    });
     youtubeToJson(url, res);
 }).listen(process.env.PORT || 4000);
 
