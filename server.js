@@ -26,7 +26,11 @@ function youtubeToJson(url, res) {
                 res.write(JSON.stringify(data));
                 res.end();
             } else {
-                res.write(JSON.stringify(data));
+                // console.log(data.items[0]);
+                res.writeHead(301, 
+                    {Location: data.items[0].url}
+                );
+                // res.write(JSON.stringify(data.items[0].url));
                 res.end();
             }
         })
